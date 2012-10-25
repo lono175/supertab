@@ -362,6 +362,14 @@ function! s:SuperTab(command) " {{{
     return g:SuperTabMappingForward ==? '<tab>' ? "\<tab>" : ''
   endif
 
+  if exists('g:UltiSnipsExpandTrigger')
+      call UltiSnips_ExpandSnippet()
+      if g:ulti_expand_res == 1
+          " there is a matched snippet
+          return '' 
+      endif
+  endif
+
   call s:InitBuffer()
 
   if s:WillComplete()
